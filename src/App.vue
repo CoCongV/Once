@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <a-layout id="mainLayout">
-            <a-layout-sider :trigger="null" collapsible v-model="collapsed">
+            <a-layout-sider :trigger="null" collapsible v-model="collapsed" style="background: #EEA2A4">
                 <side-bar :collapsed="collapsed"></side-bar>
             </a-layout-sider>
             <a-layout>
@@ -9,9 +9,13 @@
                     <title-bar @toggleSide="toggleSide"></title-bar>
                 </a-layout-header>
                 <a-layout-content
-                    :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
-                >Content</a-layout-content>
-                <a-layout-footer></a-layout-footer>
+                    :style="{background: '#fff', minHeight: '280px' }"
+                >
+                    <router-view></router-view>
+                </a-layout-content>
+                <a-layout-footer style="padding: 24px 0;">
+                    <footer-bar></footer-bar>
+                </a-layout-footer>
             </a-layout>
         </a-layout>
     </div>
@@ -21,10 +25,12 @@
 import { Component, Vue } from 'vue-property-decorator';
 import TitleBar from '@/components/TitleBar.vue';
 import SideBar from '@/components/SideBar.vue';
+import FooterBar from '@/components/FooterBar.vue';
 @Component({
     components: {
         TitleBar,
         SideBar,
+        FooterBar,
     },
 })
 export default class App extends Vue {
@@ -42,29 +48,9 @@ export default class App extends Vue {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
     height: 100%;
-}
-#nav {
-    padding: 30px;
-}
-
-#nav a {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-    color: #42b983;
 }
 #mainLayout {
     height: 100%;
-}
-#mainLayout .trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  transition: color .4s;
 }
 </style>
