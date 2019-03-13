@@ -1,45 +1,70 @@
 <template>
-  <div id="app">
-    <tool-bar></tool-bar>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <a-layout id="mainLayout">
+            <a-layout-sider :trigger="null" collapsible v-model="collapsed">
+                <side-bar :collapsed="collapsed"></side-bar>
+            </a-layout-sider>
+            <a-layout>
+                <a-layout-header style="background: #fff; padding: 0; height: 35px">
+                    <title-bar @toggleSide="toggleSide"></title-bar>
+                </a-layout-header>
+                <a-layout-content
+                    :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+                >Content</a-layout-content>
+                <a-layout-footer></a-layout-footer>
+            </a-layout>
+        </a-layout>
     </div>
-    <router-view/>
-  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ToolBar from '@/components/ToolBar.vue';
-
+import TitleBar from '@/components/TitleBar.vue';
+import SideBar from '@/components/SideBar.vue';
 @Component({
-  components: {
-    ToolBar,
-  },
+    components: {
+        TitleBar,
+        SideBar,
+    },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+    public collapsed: boolean = true;
+    private toggleSide() {
+        this.collapsed = !this.collapsed;
+    }
+}
 </script>
 
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    height: 100%;
 }
 #nav {
-  padding: 30px;
+    padding: 30px;
 }
 
 #nav a {
-  font-weight: bold;
-  color: #2c3e50;
+    font-weight: bold;
+    color: #2c3e50;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+    color: #42b983;
+}
+#mainLayout {
+    height: 100%;
+}
+#mainLayout .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .4s;
 }
 </style>
