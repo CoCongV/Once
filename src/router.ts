@@ -25,6 +25,6 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: () => import('@/views/User.vue'),
-    }
+    },
   ],
 });
