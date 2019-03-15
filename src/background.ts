@@ -1,6 +1,6 @@
 'use strict';
 
-import { app, protocol, BrowserWindow } from 'electron';
+import { app, protocol, BrowserWindow, session, Session } from 'electron';
 import {
   createProtocol,
   installVueDevtools,
@@ -15,7 +15,12 @@ let win: BrowserWindow | null;
 protocol.registerStandardSchemes(['app'], { secure: true });
 function createWindow() {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, frame: false});
+  win = new BrowserWindow({ width: 800, height: 600, frame: false, webPreferences: { webSecurity: false } });
+
+  (<Session> session.defaultSession).webRequest.onBeforeSendHeaders((details, callback) => {
+    details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3071.115 Safari/537.36';
+    callback({ cancel: false, requestHeaders: details.requestHeaders });
+  });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

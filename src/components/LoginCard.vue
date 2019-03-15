@@ -33,6 +33,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import axios from 'axios';
 @Component
 export default class LoginCard extends Vue {
     private mode: boolean = true;
@@ -56,11 +57,12 @@ export default class LoginCard extends Vue {
         this.userName = '';
     }
     private login() {
-        this.netease.login(this.userName, this.password).then((response) => {
-            console.log(response);
-        }).catch((error) => {
-            console.log(error);
-        })
+        console.log(this.axios)
+        // this.netease.search(this.userName).then((response) => {
+        //     console.log(response);
+        // }).catch((error) => {
+        //     console.log(error);
+        // })
     }
 }
 </script>

@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -29,14 +28,13 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/utils/netease/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx",
   ],
   "exclude": [
-    "node_modules",
-    "dist",
-    "public",
+    "node_modules"
   ]
 }

@@ -1,13 +1,8 @@
 import queryString from 'querystring';
-import * as encrypt from '@/utils/netease/crypto';
-const request = require('request');
+import { AxiosInstance, AxiosPromise, AxiosRequestConfig } from "axios";
 
-// interface options {
-//     cookie: any;
-//     crypto: string;
-// }
-
-// request.debug = true;
+import { Headers, Options } from ".";
+import * as encrypt from './crypto';
 
 const chooseUserAgent = (ua: string | null): string | null => {
     const userAgentList: string[] = [
@@ -39,15 +34,22 @@ const chooseUserAgent = (ua: string | null): string | null => {
     return userAgentList[index];
 };
 
-export const CreateRequest = (method: string, url: string, data: any, options: any) => {
-    return new Promise((resolve, reject) => {
-        let headers: { [key: string]: any } = { 'User-Agent': chooseUserAgent(options.ua) };
+export class NeteaseAxios {
+    public _axios: AxiosInstance;
+    constructor(axios: AxiosInstance) {
+        this._axios = axios;
+    }
+
+    public axios(method: string, url: string, data: any, options: Options): AxiosPromise {
+        const headers: Headers = {};
+        // 'User-Agent': chooseUserAgent((<string>options.ua)),
         if (method.toUpperCase() === 'POST') {
             headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
         if (url.includes('music.163.com')) {
             headers['Referer'] = 'https://music.163.com';
         }
+
         if (typeof options.cookie === 'object') {
             headers['Cookie'] = Object.keys(options.cookie).map((key) => {
                 encodeURIComponent(key) + '=' + encodeURIComponent(options.cookie[key]);
@@ -55,6 +57,7 @@ export const CreateRequest = (method: string, url: string, data: any, options: a
         } else if (options.cookie) {
             headers['Cookie'] = options.cookie;
         }
+
         if (options.crypto === 'weapi') {
             const csrfToken = (headers['Cookie'] || '').match(/_csrf=([^(;|$)]+)/);
             data.csrf_token = csrfToken ? csrfToken[1] : '';
@@ -70,49 +73,13 @@ export const CreateRequest = (method: string, url: string, data: any, options: a
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36';
             url = 'https://music.163.com/api/linux/forward';
         }
-        
-        const answer: { status: number, body: { code: number, msg: string }, cookie: any } = { status: 500, body: { code: 0, msg: '' }, cookie: [] };
-        const settings: { [key: string]: any; } = {
+
+        const config: AxiosRequestConfig = {
             'method': method,
             'url': url,
-            'body': queryString.stringify(data),
+            'data': queryString.stringify(data),
             'headers': headers,
         };
-
-        // !!! don't support proxy !!!
-        // if (/\.pac$/i.test(options.proxy)) {
-        //     settings.agent = new PacProxyAgent(options.proxy);
-        // } else {
-        //     settings.proxy = options.proxy;
-        // }
-
-        request(
-            settings,
-            (err: any, res: any, body: any) => {
-                console.log(res)
-                console.log(res.headers)
-                if (err) {
-                    answer.status = 502;
-                    answer.body = { code: 502, msg: err.stack };
-                } else {
-                    answer.cookie = (res.headers['set-cookie'] || []).map((x: string) => {
-                        x.replace(/\s*Domain=[^(;|$)]+;*/, '');
-                    });
-                    try {
-                        answer.body = JSON.parse(body);
-                        answer.status = answer.body.code || res.statusCode;
-                    } catch (e) {
-                        answer.body = body;
-                        answer.status = res.statusCode;
-                    }
-                    answer.status = 100 < answer.status && answer.status < 600 ? answer.status : 400;
-                    if (answer.status === 200) {
-                        resolve(answer);
-                    } else {
-                        reject(answer);
-                    }
-                }
-            },
-        );
-    });
-};
+        return this._axios(config);
+    }
+}

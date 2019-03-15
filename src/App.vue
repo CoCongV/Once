@@ -9,7 +9,7 @@
                     <title-bar @toggleSide="toggleSide"></title-bar>
                 </a-layout-header>
                 <a-layout-content
-                    :style="{background: '#fff', minHeight: '280px' }"
+                    :style="{background: '#fff', minHeight: '280px'}"
                 >
                     <router-view></router-view>
                 </a-layout-content>

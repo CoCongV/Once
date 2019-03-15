@@ -1,5 +1,8 @@
 import _Vue from 'vue';
+
 import crypto from 'crypto';
+import { NeteaseAxios } from './axios';
+
 
 interface AccountInfo {
     id: number;
@@ -46,52 +49,80 @@ interface LoginResponse {
 
 type Resposne = () => LoginResponse;
 
+interface loginConfig {
+    email: string;
+    password: string;
+    cookie: string;
+}
 
-class Netease {
-    public baseUrl = 'https://music.163.com';
-    public weapi = '/weapi';
-    public linuxapi = '/linuxapi';
+interface searchConfig {
+    keywords: string;
+    cookie: string;
+    type?: number;
+    limit?: number;
+    offset?: number;
+}
 
-    public phoneLoginUrl = '/login/cellphone';
-    public emailLoginUrl = '/login';
-    public refreshLoginUrl = '/login/refresh';
-    public logoutUrl = '/logout';
-    public searchUrl = '/search/get';
-
-    private request: any;
-    constructor(request: any) {
-        this.request = request;
-    }
-
-    public login(eamil: string, password: string, cookie: string) {
-        const data = {
-            username: eamil,
-            password: crypto.createHash('md5').update(password).digest('hex'),
-            rememberLogin: 'true',
-        };
-        return this.request(
-            'POST', this.baseUrl + this.weapi + this.emailLoginUrl, data,
-            { 'crypto': 'weapi', 'ua': 'pc', 'cookie': cookie },
-        );
-    }
-    public search(keywords: string, cookie: string, type: number = 1, limit: number = 30, offset: number = 0) {
-        const data = {
-            's': keywords,
-            'type': type,
-            'limit': limit,
-            'offset': offset,
-        };
-        return this.request(
-            'POST', this.baseUrl + this.weapi + this.searchUrl, data,
-            {'crypto': 'weapi', 'cookie': cookie},
-        );
-    }
+interface playListHighqualityConfig {
+    cat?: string;
+    limit?: number;
+    before?: number;
+    cookie?: string;
 }
 
 
-export default {
-    install(Vue: any, request: any) {
-        Vue.prototype.netease = new Netease(request);
-    },
-};
+export class Netease {
+    public weapi = '/weapi';
+    public linuxapi = '/linuxapi';
 
+    public phoneLoginURL = '/login/cellphone';
+    public emailLoginURL = '/login';
+    public refreshLoginURL = '/login/refresh';
+    public logoutURL = '/logout';
+    public searchURL = '/search/get';
+    public playlistHighqualityURL = '/playlist/highquality/list';
+
+    private neteaseAxios: NeteaseAxios;
+    constructor(neteaseAxios: NeteaseAxios) {
+        this.neteaseAxios = neteaseAxios;
+    }
+
+    public login(config: loginConfig) {
+        const data = {
+            username: config.email,
+            password: crypto.createHash('md5').update(config.password).digest('hex'),
+            rememberLogin: 'true',
+        };
+        return this.neteaseAxios.axios(
+            'POST', this.weapi + this.emailLoginURL, data,
+            { 'crypto': 'weapi', 'ua': 'pc', 'cookie': config.cookie },
+        );
+    }
+    public search(config: searchConfig) {
+        const data = {
+            's': config.keywords,
+            'type': config.type || 1,
+            'limit': config.limit || 30,
+            'offset': config.offset || 0,
+        };
+        return this.neteaseAxios.axios(
+            'POST', this.weapi + this.searchURL, data,
+            { 'crypto': 'weapi', 'cookie': config.cookie },
+        );
+    }
+    /**
+     * topPlaylistHighquality
+     */
+    public playlistHighquality(config: playListHighqualityConfig) {
+        const data = {
+            cat: config.cat || '全部',
+            limit: config.limit || 50,
+            before: config.before || 0,
+            total: true,
+        }
+        return this.neteaseAxios.axios(
+            'POST', this.weapi + this.playlistHighqualityURL, data,
+            {crypto: 'weapi', cookie: config.cookie}
+        )
+    }
+}
