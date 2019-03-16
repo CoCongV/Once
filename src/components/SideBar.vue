@@ -1,6 +1,6 @@
 <template>
     <a-menu mode="inline" :defaultSelectedKeys="['1']" class="sideMenu">
-        <a-menu-item key="1" @click="$router.push({name: 'home'})">
+        <a-menu-item key="1" @click="$router.push({name: 'netease'})">
             <a-icon type="fire"/>
             <span>发现</span>
         </a-menu-item>

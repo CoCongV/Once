@@ -1,20 +1,23 @@
 <template>
     <div id="app">
         <a-layout id="mainLayout">
-            <a-layout-sider :trigger="null" collapsible v-model="collapsed" style="background: #EEA2A4">
+            <a-layout-sider
+                :trigger="null"
+                collapsible
+                v-model="collapsed"
+                :style="{height: getHeight}"
+            >
                 <side-bar :collapsed="collapsed"></side-bar>
             </a-layout-sider>
-            <a-layout>
+            <a-layout style="outflow: scroll">
                 <a-layout-header style="background: #fff; padding: 0; height: 35px">
                     <title-bar @toggleSide="toggleSide"></title-bar>
                 </a-layout-header>
-                <a-layout-content
-                    :style="{background: '#fff', minHeight: '280px'}"
-                >
+                <a-layout-content>
                     <router-view></router-view>
                 </a-layout-content>
-                <a-layout-footer style="padding: 24px 0;">
-                    <footer-bar></footer-bar>
+                <a-layout-footer id="footbar">
+                    <footer-bar class="PlayerNavigation"></footer-bar>
                 </a-layout-footer>
             </a-layout>
         </a-layout>
@@ -30,11 +33,14 @@ import FooterBar from '@/components/FooterBar.vue';
     components: {
         TitleBar,
         SideBar,
-        FooterBar,
-    },
+        FooterBar
+    }
 })
 export default class App extends Vue {
     public collapsed: boolean = true;
+    get getHeight () {
+        return window.outerHeight;
+    }
     private toggleSide() {
         this.collapsed = !this.collapsed;
     }
@@ -50,7 +56,8 @@ export default class App extends Vue {
     text-align: center;
     height: 100%;
 }
-#mainLayout {
-    height: 100%;
+#footbar {
+    padding: 25px 0;
 }
+
 </style>

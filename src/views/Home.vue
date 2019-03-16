@@ -1,12 +1,5 @@
 <template>
-    <div>
-        <home-menu></home-menu>
-        <div>
-            <a-row>
-                <a-col :span="3" v-for="list in playlists" :key="playlists.indexOf(list)">{{list.name}}</a-col>
-            </a-row>
-        </div>
-    </div>
+    <span>HOME</span>
 </template>
 
 <script lang="ts">

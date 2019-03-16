@@ -1,7 +1,7 @@
 import queryString from 'querystring';
-import { AxiosInstance, AxiosPromise, AxiosRequestConfig } from "axios";
+import { AxiosInstance, AxiosPromise, AxiosRequestConfig } from 'axios';
 
-import { Headers, Options } from ".";
+import { Headers, Options } from '.';
 import * as encrypt from './crypto';
 
 const chooseUserAgent = (ua: string | null): string | null => {
