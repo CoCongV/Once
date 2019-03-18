@@ -50,6 +50,7 @@ export default class FooterBar extends Vue {
     backdrop-filter: blur(20px);
 }
 .controller {
+    color: #fff;
     font-family: 'seg style';
 }
 .controller .button {
@@ -64,13 +65,13 @@ export default class FooterBar extends Vue {
     transition: all 0.2s linear;
 }
 .controller .button:hover {
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.250);
 }
 .controller .button:active {
     width: 32px;
     height: 32px;
     line-height: 32px;
+    color: rgba(255, 255, 255, 0.250);
 }
 .random.on {
     background-color: rgba(255,255,255,0.2);
