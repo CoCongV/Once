@@ -1,26 +1,15 @@
 <template>
     <div id="app">
-        <a-layout id="mainLayout">
-            <a-layout-sider
-                :trigger="null"
-                collapsible
-                v-model="collapsed"
-                :style="{height: getHeight}"
-            >
-                <side-bar :collapsed="collapsed"></side-bar>
-            </a-layout-sider>
-            <a-layout style="outflow: scroll">
-                <a-layout-header style="background: #fff; padding: 0; height: 35px">
-                    <title-bar @toggleSide="toggleSide"></title-bar>
-                </a-layout-header>
-                <a-layout-content>
-                    <router-view></router-view>
-                </a-layout-content>
-                <a-layout-footer id="footbar">
-                    <footer-bar class="PlayerNavigation"></footer-bar>
-                </a-layout-footer>
-            </a-layout>
+        <a-layout style="height: 100%">
+            <side-bar></side-bar>
+          <a-layout>
+            <a-layout-header style="height: 35px; padding: 0px">
+                <title-bar></title-bar>
+            </a-layout-header>
+            <a-layout-content></a-layout-content>
+          </a-layout>
         </a-layout>
+        <play-bar></play-bar>
     </div>
 </template>
 
@@ -28,21 +17,18 @@
 import { Component, Vue } from 'vue-property-decorator';
 import TitleBar from '@/components/TitleBar.vue';
 import SideBar from '@/components/SideBar.vue';
-import FooterBar from '@/components/FooterBar.vue';
+import PlayBar from '@/components/PlayBar.vue';
 @Component({
     components: {
         TitleBar,
         SideBar,
-        FooterBar
+        PlayBar
     }
 })
 export default class App extends Vue {
     public collapsed: boolean = true;
     get getHeight () {
         return window.outerHeight;
-    }
-    private toggleSide() {
-        this.collapsed = !this.collapsed;
     }
 }
 </script>

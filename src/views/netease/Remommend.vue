@@ -24,4 +24,3 @@ export default class HomeMenu extends Vue {
     }
 }
 </script>
-

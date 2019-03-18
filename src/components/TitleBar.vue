@@ -1,12 +1,9 @@
 <template>
     <a-row type="flex" justify="start" :style="{lineHeight: '35px'}" id="titleBar">
-        <a-col :span="1" class="icon" @click="toggleSide">
-            <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'"></a-icon>
-        </a-col>
-        <a-col :span="1" :offset="20" class="icon" @click="minimize">
+        <a-col :span="1" :offset="21" class="icon" @click="minimize">
             <a-icon type="minus"/>
         </a-col>
-        <a-col :span="1" class="icon" @click="isMax ? unmaximize() : maximize()">
+        <a-col :span="1" class="icon" @click="isMax ? restore() : maximize()">
             <a-icon :type="isMax ? 'fullscreen-exit' : 'fullscreen'"/>
         </a-col>
         <a-col :span="1" @click="close" class="icon">
@@ -16,6 +13,7 @@
 </template>
 
 <script lang="ts">
+import { ipcRenderer } from "electron";
 import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class TitleBar extends Vue {
@@ -23,21 +21,21 @@ export default class TitleBar extends Vue {
     private isMax: boolean = false;
     private isSearch: boolean = false;
     private electron = require('electron');
-    private win = this.electron.remote.getCurrentWindow();
     private maximize() {
-        this.win.maximize();
+        ipcRenderer.send('maximize');
         this.isMax = true;
     }
     private minimize() {
-        this.win.minimize();
+        ipcRenderer.send('minimize');
+        // this.win.minimize();
         this.isMax = false;
     }
-    private unmaximize() {
-        this.win.unmaximize();
+    private restore() {
+        ipcRenderer.send('restore');
         this.isMax = false;
     }
     private close() {
-        this.win.close();
+        ipcRenderer.send('close');
     }
     private toggleSide() {
         this.collapsed = !this.collapsed;
