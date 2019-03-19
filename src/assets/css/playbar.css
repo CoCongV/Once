@@ -1,0 +1,79 @@
+#playBar {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 90px;
+    background-color: rgba(0, 0, 0, 0.5);
+    --btn-on-bg: rgba(0, 0, 0, 0.4)
+    /* filter: blur(20px) */
+}
+#playBar .controller {
+    color: #fff;
+    padding-top: 10px;
+    font-family: 'seg style';
+}
+#playBar .controller .buttonGroup {
+    width: 100%;
+}
+#playBar .controller button{
+    width: 34px;
+    height: 34px;
+    line-height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #00000000;
+    border: none;
+    font-size: 20px;
+    transition: all 0.2s linear;
+}
+#playBar .progress .ant-slider-disabled,
+#playBar .progress .ant-slider-disabled .ant-slider-handle {
+    cursor: auto !important;
+}
+#playBar .progress .ant-slider-disabled .ant-slider-rail {
+    background-color: rgba(250, 250, 250, 0.2) !important;
+}
+#playBar .progress .ant-slider-disabled .ant-slider-handle {
+    background-color: #00000000;
+    border: none;
+}
+
+#playBar .controller button:hover {
+    background-color: rgba(0, 0, 0, 0.2)
+}
+#playBar .controller button:active {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    color: rgba(250, 250, 250, 0.2)
+}
+button.random::after {
+    content: '\e8b1';
+}
+button.random.on {
+    background-color: var(--btn-on-bg) !important;
+}
+button.play::after {
+    content: '\e768';
+}
+button.pause::after {
+    content: '\edb4';
+}
+button.previous::after {
+    content: '\e892';
+}
+button.next::after {
+    content: '\e893';
+}
+button.circle::after {
+    content: '\e72c';
+}
+button.circle.on {
+    background-color: var(--btn-on-bg) !important;
+}
+button.circle.one {
+    background-color: var(--btn-on-bg) !important;
+}
+button.circle.one::after {
+    content: '\e8ed';
+}
