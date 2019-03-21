@@ -1,0 +1,11 @@
+#sidebar {
+    background-color: rgba(200, 200, 200, 0.5);
+    
+}
+#sidebar .sideMenu {
+    background-color: #00000000 !important;
+    border: none;
+}
+#sidebar .sideMenu .ant-menu-item-selected {
+    background-color: rgba(0, 0, 0, 0.5)
+}

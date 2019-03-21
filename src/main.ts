@@ -3,6 +3,7 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.less';
 import '@/assets/css/base.css';
 import '@/assets/css/playbar.css';
+import '@/assets/css/sidebar.css';
 import '@/assets/css/titlebar.css';
 
 import axios from 'axios';

@@ -1,6 +1,6 @@
 <template>
-    <a-layout-sider collapsible v-model="collapsed" :trigger="null">
-        <div class="sideTrigger">
+    <a-layout-sider collapsible v-model="collapsed" :trigger="null" id="sidebar">
+        <div class="return">
             <a-icon type="arrow-left"/>
         </div>
         <div class="sideTrigger" @click="collapsed = !collapsed">
