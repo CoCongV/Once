@@ -4,7 +4,8 @@
     width: 100%;
     height: 90px;
     background-color: rgba(0, 0, 0, 0.5);
-    --btn-on-bg: rgba(0, 0, 0, 0.4)
+    --btn-on-bg: rgba(0, 0, 0, 0.4);
+    --test-color: rgba(255, 255, 255, 0.4);
     /* filter: blur(20px) */
 }
 #playBar .controller {
@@ -25,6 +26,9 @@
     border: none;
     font-size: 20px;
     transition: all 0.2s linear;
+}
+#playBar .progress .ant-slider-rail {
+    height: 3px;
 }
 #playBar .progress .ant-slider-disabled,
 #playBar .progress .ant-slider-disabled .ant-slider-handle {

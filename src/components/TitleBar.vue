@@ -1,14 +1,8 @@
 <template>
-    <a-row type="flex" justify="start" :style="{lineHeight: '35px'}" id="titleBar">
-        <a-col :span="1" :offset="21" class="icon" @click="minimize">
-            <a-icon type="minus"/>
-        </a-col>
-        <a-col :span="1" class="icon" @click="isMax ? restore() : maximize()">
-            <a-icon :type="isMax ? 'fullscreen-exit' : 'fullscreen'"/>
-        </a-col>
-        <a-col :span="1" @click="close" class="icon">
-            <a-icon type="close"/>
-        </a-col>
+    <a-row type="flex" justify="end" :style="{lineHeight: '35px'}" id="titleBar">
+        <button class="minimize" @click="minimize"></button>
+        <button :class="isMax ? 'restore' : 'maximize'" @click="isMax ? restore() : maximize()"></button>
+        <button class="close" @click="close"></button>
     </a-row>
 </template>
 
@@ -20,15 +14,12 @@ export default class TitleBar extends Vue {
     protected collapsed: boolean = true;
     private isMax: boolean = false;
     private isSearch: boolean = false;
-    private electron = require('electron');
     private maximize() {
         ipcRenderer.send('maximize');
         this.isMax = true;
     }
     private minimize() {
         ipcRenderer.send('minimize');
-        // this.win.minimize();
-        this.isMax = false;
     }
     private restore() {
         ipcRenderer.send('restore');
@@ -45,13 +36,4 @@ export default class TitleBar extends Vue {
 </script>
 
 <style>
-#titleBar {
-    -webkit-app-region: drag;
-}
-#titleBar .icon {
-    -webkit-app-region: no-drag;
-}
-#titleBar .icon:hover {
-    color: #1890ff;
-}
 </style>

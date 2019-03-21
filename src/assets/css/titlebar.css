@@ -1,0 +1,29 @@
+#titleBar {
+    font-family: 'seg style';
+    -webkit-app-region: drag;
+}
+
+#titleBar button {
+    height: 35px;
+    width: 35px;
+    border: none;
+    line-height: 35px;
+    background-color: #00000000;
+    -webkit-app-region: no-drag;
+}
+#titleBar button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.minimize::after {
+    content: '\e921';
+}
+.maximize::after {
+    content: '\e922';
+}
+.restore::after {
+    content: '\e923';
+}
+.close::after {
+    content: '\e8bb';
+}

@@ -22,7 +22,7 @@
                 </a-row>
                 <a-row type="flex" justify="center">
                     <a-col :span="24" :lg="12" class="progress">
-                        <a-slider id="test" :defaultValue="0" :disabled="progressDisabled" :tipFormatter="null"/>
+                        <a-slider :defaultValue="0" :disabled="progressDisabled" :tipFormatter="null"/>
                     </a-col>
                 </a-row>
             </a-col>
@@ -37,7 +37,7 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class FooterBar extends Vue {
     private isPlaying = false;
     private random = false;
-    private progressDisabled = true;
+    private progressDisabled = false;
     private circleList = ['off', 'on', 'one'];
     private circleMode = 'off';
     private toggleStatus() {

@@ -2,3 +2,7 @@
 	font-family: 'seg style';
 	src: url('../fonts/SegMDL2.ttf') format('truetype');
 }
+
+#app button {
+	outline: none;
+}

@@ -99,7 +99,7 @@ if (isDevelopment) {
   }
 }
 
-ipcMain.on('closs', () => {
+ipcMain.on('close', () => {
   app.quit();
 })
 ipcMain.on('minimize', () => {
@@ -107,7 +107,7 @@ ipcMain.on('minimize', () => {
     win.minimize();
   }
 });
-ipcMain.on('maxmize', () => {
+ipcMain.on('maximize', () => {
   if (win && !win.isMaximized()) {
     win.maximize();
   }
