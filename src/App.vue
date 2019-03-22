@@ -2,7 +2,7 @@
     <div id="app">
         <a-layout style="height: 100%">
             <side-bar></side-bar>
-          <a-layout>
+          <a-layout class="mainContent">
             <a-layout-header style="height: 35px; padding: 0px">
                 <title-bar></title-bar>
             </a-layout-header>

@@ -3,7 +3,7 @@
         <div class="return">
             <a-icon type="arrow-left"/>
         </div>
-        <div class="sideTrigger" @click="collapsed = !collapsed">
+        <div class="trigger" @click="collapsed = !collapsed">
             <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'"></a-icon>
         </div>
         <a-menu mode="inline" :defaultSelectedKeys="['1']" class="sideMenu">
@@ -85,7 +85,7 @@ export default class SideBar extends Vue {
     background: rgba(255, 255, 255, 0.2);
     margin: 16px;
 }
-.sideTrigger {
+.trigger {
     height: 35px;
     line-height: 35px;
 }
