@@ -6,7 +6,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     --btn-on-bg: rgba(0, 0, 0, 0.4);
     --test-color: rgba(255, 255, 255, 0.4);
-    /* filter: blur(20px) */
+    backdrop-filter: blur(20px);
 }
 #playBar .controller {
     color: #fff;

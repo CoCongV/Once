@@ -1,6 +1,6 @@
 <template>
     <a-layout style="height: 100%">
-        <a-layout-header style="padding: 0 30px">
+        <a-layout-header style="padding: 0 30px; height: 84px;">
             <home-menu></home-menu>
         </a-layout-header>
         <a-layout-content style="padding: 0 30px; overflow: scroll">

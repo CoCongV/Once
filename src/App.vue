@@ -6,7 +6,9 @@
             <a-layout-header style="height: 35px; padding: 0px">
                 <title-bar></title-bar>
             </a-layout-header>
-            <a-layout-content></a-layout-content>
+            <a-layout-content>
+                <router-view></router-view>
+            </a-layout-content>
           </a-layout>
         </a-layout>
         <play-bar></play-bar>

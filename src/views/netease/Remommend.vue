@@ -1,6 +1,6 @@
 <template>
     <a-row :gutter="24">
-      <a-col :span="4" v-for="list in playlists" :key="playlists.indexOf(list)" style="padding-top: 20px;">
+      <a-col :xs="6" :lg="4" v-for="list in playlists" :key="playlists.indexOf(list)" style="padding-top: 20px;">
           <song-list-card :src="list.coverImgUrl" :title="list.name"></song-list-card>
       </a-col>
     </a-row>
@@ -8,11 +8,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import songListCard from '@/components/netease/SongListCard.vue';
+import SongListCard from '@/components/SongListCard.vue';
 
 @Component({
     components: {
-        songListCard,
+        SongListCard,
     },
 })
 export default class HomeMenu extends Vue {

@@ -22,4 +22,3 @@ export default class SongListCard extends Vue {
     }
 }
 </script>
-

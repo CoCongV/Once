@@ -3,7 +3,6 @@ module.exports = {
         loaderOptions: {
             less: {
                 modifyVars: {
-                    'primary-color': '#fff',
                     'border-radius-base': '2px',
                     'body-background': '#00000000',
                     'layout-header-background': '#fff',
